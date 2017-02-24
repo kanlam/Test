@@ -29,7 +29,7 @@ public class Timer : MonoBehaviour {
 	}
 	public void Finish(){
 		finished = true;
-		Timertext.color = Color.cyan;
+		Timertext.color = Color.red;
 
 	}
 }

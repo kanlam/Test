@@ -8,10 +8,12 @@ public class PlayerController : MonoBehaviour
 	private CharacterController controller;
 	private Vector3 moveVector;
 
+	public float currentSpeed;
 	public float speed;
 	public float sprintSpeed;
 	public float jumpForce; 
 	public bool isSprinting = false;
+
 
 	public Slider staminaBar;
 	public int maxStamina;
@@ -22,6 +24,11 @@ public class PlayerController : MonoBehaviour
 
 	private float verticalVelocity = 0.0f;
 	private float gravity = 14.0f;
+
+	private double boostTime = 20f;
+	private float boostedSpeed;
+	public bool isBoosted = false;
+	public float boostTimeFallrate = 1f;
 
 	//private float currentStamina = 3.0f;
 
@@ -52,45 +59,67 @@ public class PlayerController : MonoBehaviour
 		{
 			verticalVelocity -= gravity * Time.deltaTime;
 		}	
-
-
+			
 		moveVector.x = Input.GetAxisRaw("Horizontal")*speed;//x = left and right
 		moveVector.y = verticalVelocity;//y = up and down
-		if(!isSprinting){
-			moveVector.z = speed;
+		moveVector.z = currentSpeed;//z = forward and backward
+
+		if(!isSprinting && !isBoosted){
+			currentSpeed = speed;
 			staminaBar.value += Time.deltaTime / staminaRegainrate * staminaReganinMult;
-		}//z = forward and backward
+		}
 
-		if(isSprinting) {
-			moveVector.z = sprintSpeed;
+		if(isSprinting && !isBoosted) {
+			currentSpeed = sprintSpeed;
 			staminaBar.value -= Time.deltaTime / staminaFallrate * staminaFallMult;
-		}//z = forward and backward
 
+		}
+		if (isSprinting && isBoosted) {
+			currentSpeed = sprintSpeed;
+			boostTime -= Time.deltaTime * boostTimeFallrate;
+			Debug.Log (boostTime);
+			if (boostTime <= 0) {
+				isBoosted = false;
+				currentSpeed = speed;
+				boostTime = 20f;
+			}
+		}
+		if (!isSprinting && isBoosted) {
 
+			currentSpeed = sprintSpeed;
+			boostTime -= Time.deltaTime * boostTimeFallrate;
+			Debug.Log (boostTime);
+			if (boostTime <= 0) {
+				isBoosted = false;
+				currentSpeed = speed;
+				boostTime = 20f;
+			}
+		}
 
 		if (Input.GetKeyDown (KeyCode.LeftShift)) {
 			isSprinting = true;
 			sprintSpeed = speed *2 ;
-
 		}
 		if (Input.GetKeyUp (KeyCode.LeftShift)) {
 			isSprinting = false;
-
 		}
-		if (staminaBar.value >= maxStamina) {
+		if (staminaBar.value >= maxStamina) 
+		{
 			staminaBar.value = maxStamina;
 
 		} else if (staminaBar.value <= 0) 
 		  {
 			staminaBar.value = 0;
 			sprintSpeed = speed;
-
-		} else if (staminaBar.value >= 0) 
-		  {
-			sprintSpeed = sprintSpeed;
-		}
-
+		} 
 		controller.Move(moveVector * Time.deltaTime);
-		
+	}
+
+	void OnTriggerEnter(Collider hit) {
+		if (hit.gameObject.name == "SpeedBoost") 
+		{
+			isBoosted = true;
+			Debug.Log ("Boost");
+		}
 	}
 }

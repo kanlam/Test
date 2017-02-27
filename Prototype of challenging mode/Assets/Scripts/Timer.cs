@@ -6,6 +6,9 @@ using UnityEngine.UI;
 public class timer : MonoBehaviour {
 	public Text timerLabel;
 	public float startTimer = 0;
+	public bool isfinish;
+
+	public FinishMenu finishMenu;
 
 	private float time;
 	
@@ -19,7 +22,7 @@ public class timer : MonoBehaviour {
 			var seconds = time % 60;//Use the euclidean division for the seconds.
 			var fraction = (time * 100) % 100;
 
-			//Debug.Log (time);
+			Debug.Log (time);
 		
 			//update the label value
 			timerLabel.text = string.Format ("{0:00} : {1:00} : {2:000}", minutes, seconds, fraction);
@@ -30,13 +33,18 @@ public class timer : MonoBehaviour {
 		if(hit.gameObject.name == "startRace")
 		{
 			Debug.Log ("Start");
+			isfinish = false;
 			setTimer(1);//start the timer
 		}
 
 		if(hit.gameObject.name == "finishRace")
 		{
 			Debug.Log ("Finish");
+
 			setTimer(0);// stop the timer
+			isfinish = true;
+			finishMenu.ToggleMenu (time);
+
 
 			if (time <= 14) { //gold time (0:00 - 00:14:00)
 				timerLabel.color = Color.blue;

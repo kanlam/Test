@@ -30,14 +30,14 @@ public class Progressbar : MonoBehaviour {
 		float ratio = (progress/maxProgress);
 		currentProgressbar.rectTransform.localScale = new Vector3 (ratio, 1, 1);
 		ratioText.text = (ratio*100).ToString ("0")+ "%";
-		Debug.Log ("CurrentProgress: " + progress);
+		//Debug.Log ("CurrentProgress: " + progress);
 	}
 
 	void Startdistance(){
 		if (start) {
 			dist = Vector3.Distance (finishLine.transform.position, transform.position);//tracking the distance
 			progress = maxProgress-dist;
-			Debug.Log ("Distance: " + dist);
+			//Debug.Log ("Distance: " + dist);
 		}
 		if (!start) {
 			return;

@@ -8,8 +8,9 @@ public class PlayerController : MonoBehaviour
 	private CharacterController controller;
 	private Vector3 moveVector;
 
+
+	public float speed = 6;
 	public float currentSpeed;
-	public float speed;
 	public float sprintSpeed;
 	public float jumpForce; 
 	public bool isSprinting = false;
@@ -34,6 +35,8 @@ public class PlayerController : MonoBehaviour
 
 	// Use this for initialization
 	void Start () {
+		currentSpeed = speed;
+		sprintSpeed = speed * 2;
 		controller = GetComponent<CharacterController> ();
 		staminaBar.maxValue = maxStamina;
 		staminaBar.value = maxStamina;
@@ -76,6 +79,7 @@ public class PlayerController : MonoBehaviour
 		}
 		if (isSprinting && isBoosted) {
 			currentSpeed = sprintSpeed;
+			staminaBar.value -= Time.deltaTime / staminaFallrate * staminaFallMult;
 			boostTime -= Time.deltaTime * boostTimeFallrate;
 			Debug.Log (boostTime);
 			if (boostTime <= 0) {
@@ -87,6 +91,7 @@ public class PlayerController : MonoBehaviour
 		if (!isSprinting && isBoosted) {
 
 			currentSpeed = sprintSpeed;
+			staminaBar.value += Time.deltaTime / staminaRegainrate * staminaReganinMult;
 			boostTime -= Time.deltaTime * boostTimeFallrate;
 			Debug.Log (boostTime);
 			if (boostTime <= 0) {

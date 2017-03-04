@@ -65,7 +65,7 @@ public class PlayerController : MonoBehaviour
 			
 		moveVector.x = Input.GetAxisRaw("Horizontal")*speed;//x = left and right
 		moveVector.y = verticalVelocity;//y = up and down
-		moveVector.z = currentSpeed;//z = forward and backward
+		moveVector.z = Input.GetAxisRaw("Vertical")* currentSpeed;//z = forward and backward
 
 		if(!isSprinting && !isBoosted){
 			currentSpeed = speed;

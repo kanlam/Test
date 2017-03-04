@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/ChallengingMode.unity
+- path: Assets/Scenes/BeatTheMonsterMode.unity
   isLoaded: 1
   isActive: 1

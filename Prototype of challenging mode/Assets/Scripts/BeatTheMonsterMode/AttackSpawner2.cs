@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackSpawner: MonoBehaviour {
-
+public class AttackSpawner2 : MonoBehaviour {
 
 	public GameObject[] enemies;
 	//public Vector3 spawnValues;
@@ -23,7 +22,7 @@ public class AttackSpawner: MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		
+
 
 	}
 
@@ -34,12 +33,12 @@ public class AttackSpawner: MonoBehaviour {
 		while (!stop) 
 		{
 
-			Vector3 spawnPosition = new Vector3 (Random.Range(monster.transform.position.x -3,monster.transform.position.x +3),monster.transform.position.y,monster.transform.position.z);
+			Vector3 spawnPosition = new Vector3 (monster.transform.position.x,monster.transform.position.y,monster.transform.position.z);
 
 
 
-			Instantiate (enemies [0], spawnPosition, Quaternion.identity);
-			
+			Instantiate (enemies [0], spawnPosition, Quaternion.Euler (0, 0, 90));
+
 			yield return new WaitForSeconds (spawnWait);
 		}
 	}

@@ -31,6 +31,9 @@ public class PlayerController : MonoBehaviour
 	public bool isBoosted = false;
 	public float boostTimeFallrate = 1f;
 
+
+
+
 	//private float currentStamina = 3.0f;
 
 	// Use this for initialization
@@ -118,13 +121,13 @@ public class PlayerController : MonoBehaviour
 			sprintSpeed = speed;
 		} 
 		controller.Move(moveVector * Time.deltaTime);
+
 	}
 
 	void OnTriggerEnter(Collider hit) {
 		if (hit.gameObject.name == "SpeedBoost") 
 		{
 			isBoosted = true;
-			Debug.Log ("Boost");
 		}
 	}
 }

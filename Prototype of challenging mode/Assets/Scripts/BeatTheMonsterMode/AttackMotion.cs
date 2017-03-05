@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class AttackMotion : MonoBehaviour {
 
-	 float speed = 1f;
+	 float speed = 10f;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -14,4 +15,12 @@ public class AttackMotion : MonoBehaviour {
 	void Update () {
 		transform.Translate (0, 0, -speed*Time.deltaTime);
 	}
+
+	void OnTriggerEnter (Collider hit){
+		if (hit.gameObject.name == "End") {
+			Destroy (this.gameObject);
+		}
+	}
+
 }
+

@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PlayerDamage : MonoBehaviour {
 
-	public int MaxHealth = 10;
+	public int Health = 10;
+	public bool isDead = false;
 
 	public AudioSource hitsound;
 
@@ -14,15 +15,18 @@ public class PlayerDamage : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+		if (Health <= 0){
+			isDead = true;
+		}
     }
 
 	void OnTriggerEnter(Collider hit){
 
-		if (hit.gameObject.name == "Attack1(Clone)") {
-			MaxHealth = MaxHealth - 1;
-
+		if (hit.gameObject.name == "Attack1(Clone)" || hit.gameObject.name == "Cylinder(Clone)" ) {
+			Health = Health - 1;
 			hitsound.Play ();
 		}
-	}		
+	}
+
+
 }

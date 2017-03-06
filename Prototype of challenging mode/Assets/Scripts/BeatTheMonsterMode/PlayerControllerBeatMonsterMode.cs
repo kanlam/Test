@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerController : MonoBehaviour 
+public class PlayerControllerBeatMonsterMode : MonoBehaviour 
 {
 	private CharacterController controller;
 	private Vector3 moveVector;
@@ -47,7 +47,7 @@ public class PlayerController : MonoBehaviour
 		staminaFallrate = 1;
 		staminaRegainrate = 1;
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 
@@ -65,7 +65,7 @@ public class PlayerController : MonoBehaviour
 		{
 			verticalVelocity -= gravity * Time.deltaTime;
 		}	
-			
+
 		moveVector.x = Input.GetAxisRaw("Horizontal")*speed;//x = left and right
 		moveVector.y = verticalVelocity;//y = up and down
 		moveVector.z = Input.GetAxisRaw("Vertical")* currentSpeed;//z = forward and backward
@@ -116,7 +116,7 @@ public class PlayerController : MonoBehaviour
 			staminaBar.value = maxStamina;
 
 		} else if (staminaBar.value <= 0) 
-		  {
+		{
 			staminaBar.value = 0;
 			sprintSpeed = speed;
 		} 

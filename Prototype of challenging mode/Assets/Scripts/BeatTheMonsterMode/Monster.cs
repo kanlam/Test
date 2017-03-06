@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Monster : MonoBehaviour {
 
-	private float speed = 1f;
+	public float speed = 1f;
+	public bool isMove = true;
 
 
 	// Use this for initialization
@@ -14,9 +15,30 @@ public class Monster : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		transform.Translate (0, 0, speed*Time.deltaTime);
+		if (isMove) {
+			move ();
+		} 
+		else {
+			stop ();
+		}
+
 
 	}
 
+	void move(){
+		transform.Translate (0, 0, speed*Time.deltaTime);
+	}
+	void stop (){
+		transform.Translate (0, 0, 0);
+		Destroy (GameObject.Find("Attack2"));
+		Destroy (GameObject.Find("Attack1"));
+
+	}
+
+	void OnTriggerEnter(Collider hit){
+		if (hit.gameObject.name == "MonsterStop") {
+			isMove = false;		
+		}	
+	}
 
 }

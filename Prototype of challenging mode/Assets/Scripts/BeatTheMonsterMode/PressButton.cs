@@ -8,10 +8,9 @@ public class PressButton : MonoBehaviour {
 	public bool isPress = false;
 	public bool activateButton = false;
 
-	public GameObject cage;
+
 
 	void Start(){
-		cage = GameObject.Find ("Cage");	
 	}
 
 	// Update is called once per frame
@@ -20,10 +19,8 @@ public class PressButton : MonoBehaviour {
 
 		if (isPress && activateButton) {
 			button.transform.Translate (Vector3.down * Time.deltaTime);
-			cage.AddComponent<Rigidbody> () as Rigidbody;
-
 		}
-		if (button.transform.position.y <= 0 ) {
+		if (button.transform.position.y <= 0f ) {
 			activateButton = false;
 		}
 	}

@@ -50,10 +50,12 @@
      <Compile Include="Assets\Scripts\BeatTheMonsterMode\AttackSpawner.cs" />
      <Compile Include="Assets\Scripts\BeatTheMonsterMode\AttackSpawner2.cs" />
      <Compile Include="Assets\Scripts\BeatTheMonsterMode\CageFall.cs" />
+     <Compile Include="Assets\Scripts\BeatTheMonsterMode\DeadMenu.cs" />
      <Compile Include="Assets\Scripts\BeatTheMonsterMode\Monster.cs" />
      <Compile Include="Assets\Scripts\BeatTheMonsterMode\PlayerControllerBeatMonsterMode.cs" />
      <Compile Include="Assets\Scripts\BeatTheMonsterMode\PlayerDamage.cs" />
      <Compile Include="Assets\Scripts\BeatTheMonsterMode\PressButton.cs" />
+     <Compile Include="Assets\Scripts\BeatTheMonsterMode\WinMenu.cs" />
      <Compile Include="Assets\Scripts\ChallengingMode\BestTime.cs" />
      <Compile Include="Assets\Scripts\ChallengingMode\FinishMenu.cs" />
      <Compile Include="Assets\Scripts\ChallengingMode\PlayerControllerChallengingMode.cs" />

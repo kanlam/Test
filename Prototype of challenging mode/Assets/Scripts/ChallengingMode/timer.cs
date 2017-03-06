@@ -67,7 +67,7 @@ public class timer : MonoBehaviour {
 		{ 
 			timerLabel.color = Color.green;
 		}
-		finishMenu.ToggleMenu (time);// pass the time the FinishMenu
+		finishMenu.ToggleMenu (time);// pass the time to FinishMenu
 
 		if(PlayerPrefs.GetFloat("BestTime") > time){
 			recordBreak.text= " Your break the record! ";

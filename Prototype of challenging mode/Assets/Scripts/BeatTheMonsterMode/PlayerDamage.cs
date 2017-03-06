@@ -4,29 +4,38 @@ using UnityEngine;
 
 public class PlayerDamage : MonoBehaviour {
 
-	public int Health = 10;
+	public int Health= 10;
 	public bool isDead = false;
 
 	public AudioSource hitsound;
+
+	public DeadMenu deathMenu;
 
 	// Use this for initialization
 	void Start () {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		if (Health <= 0){
-			isDead = true;
-		}
-    }
-
+	void Update ()
+	{
+		OnDeath ();
+	}
+	
 	void OnTriggerEnter(Collider hit){
 
-		if (hit.gameObject.name == "Attack1(Clone)" || hit.gameObject.name == "Cylinder(Clone)" ) {
-			Health = Health - 1;
-			hitsound.Play ();
+		if (!isDead) {
+			if (hit.gameObject.name == "Sphere(Clone)" || hit.gameObject.name == "Cylinder(Clone)") {
+				Health = Health - 1;
+				hitsound.Play ();
+			}
 		}
 	}
 
-
+	public void OnDeath()
+	{
+		if (Health <= 0) {
+			isDead = true;
+			deathMenu.ToggleDeathMenu ();
+		}
+	}
 }

@@ -61,6 +61,9 @@
      <Compile Include="Assets\Scripts\ChallengingMode\PlayerControllerChallengingMode.cs" />
      <Compile Include="Assets\Scripts\ChallengingMode\RecordBreak.cs" />
      <Compile Include="Assets\Scripts\ChallengingMode\timer.cs" />
+     <Compile Include="Assets\Scripts\Menu\AudioManager.cs" />
+     <Compile Include="Assets\Scripts\Menu\Menu.cs" />
+     <Compile Include="Assets\Scripts\Menu\MusicManager.cs" />
      <Compile Include="Assets\Scripts\Progressbar.cs" />
      <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
      <None Include="Assets\Standard Assets\Characters\ThirdPersonCharacter\ThirdPersonCharacterGuidelines.txt" />

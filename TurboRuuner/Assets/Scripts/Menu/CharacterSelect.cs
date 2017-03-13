@@ -44,9 +44,13 @@ public class CharacterSelect : MonoBehaviour {
 		characterList [index].SetActive (true);
 	}
 
-	public void ConfirmBtn(){
+	public void ConfirmBtnBM(){
 		PlayerPrefs.SetInt("CharacterSelected", index);
-		SceneManager.LoadScene("CharacterSelectMenu");
+		SceneManager.LoadScene("3)LevelSelectMenu(BM)");
+	}
+	public void ConfirmBtnCM(){
+		PlayerPrefs.SetInt("CharacterSelected", index);
+		SceneManager.LoadScene("4)LevelSelectMenu(CM)");
 	}
 
 }

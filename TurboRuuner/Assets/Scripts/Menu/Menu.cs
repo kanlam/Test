@@ -20,10 +20,6 @@ public class Menu : MonoBehaviour {
 		activeScreenResIndex = PlayerPrefs.GetInt ("screen res index");
 		bool isFullscreen = (PlayerPrefs.GetInt ("fullscreen") == 1)?true:false; 
 
-		volunmeSliders [0].value = AudioManager.instance.masterVolumePercent;
-		volunmeSliders [1].value = AudioManager.instance.musicVolumePercent;
-		volunmeSliders [2].value = AudioManager.instance.sfxVolumePercent;
-
 		for (int i = 0; i < resolutionTogglse.Length; i++) {
 			resolutionTogglse [i].isOn = i == activeScreenResIndex;
 		}
@@ -34,8 +30,8 @@ public class Menu : MonoBehaviour {
 
 
 	//Start Game Button
-	public void NewGameBtn(string BeatTheMonsterMode){
-	 SceneManager.LoadScene ("BeatTheMonsterMode", LoadSceneMode.Single);
+	public void NewGameBtn(string CharacterSelectMenu){
+		SceneManager.LoadScene ("2)CharacterSelectMenu", LoadSceneMode.Single);
 	}
 
 	// Quit game Button
@@ -44,10 +40,12 @@ public class Menu : MonoBehaviour {
 	}
 
 	public void OptionMenu(){
+		
 		optionMenuHolder.SetActive (true);
 	}
 
 	public void backToMainMenu(){
+	
 		optionMenuHolder.SetActive (false);
 	}
 
@@ -76,14 +74,5 @@ public class Menu : MonoBehaviour {
 		PlayerPrefs.Save ();
 	}
 
-	public void SetMasterVolume(float value){
-		AudioManager.instance.SetVolume (value, AudioManager.AudioChannel.Master);
-	}
-	public void SetBGMVolume(float value){
-		AudioManager.instance.SetVolume (value, AudioManager.AudioChannel.Music);
-	}
-	public void SetSfxVolume(float value){
-		AudioManager.instance.SetVolume (value, AudioManager.AudioChannel.Sfx);
-	}
 
 }

@@ -11,8 +11,11 @@ public class PlayerControlMenu : MonoBehaviour{
 	public EnterConfirmWorld enterconfirmfireworld;
 	public EnterConfirmWorld enterconfirmoceanworld;
 
+
+
 	private void Start(){
 		Controller = GetComponent<CharacterController>();
+
 	}
 
     private void Update(){
@@ -31,11 +34,11 @@ public class PlayerControlMenu : MonoBehaviour{
 			verticalVelocity -= gravity * Time.deltaTime;
 		}
 
-	  moveVector.x = Input.GetAxis("Horizontal")*5;
+	  moveVector.x = Input.GetAxis ("Horizontal") * 5;
 	  moveVector.y = verticalVelocity;
 	  moveVector.z = Input.GetAxis("Vertical")*5 ;
-
 	  Controller.Move(moveVector * Time.deltaTime);
+
     }
 
 	public void OnTriggerEnter(Collider hit){
@@ -52,6 +55,5 @@ public class PlayerControlMenu : MonoBehaviour{
 	public void EnterOceanWorld(){
 		enterconfirmoceanworld.ToggleMenuOcean();
 	}
-
-
+		
 }

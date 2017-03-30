@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/MenuScenes/3)LevelSelectMenu(BM).unity
+- path: Assets/Scenes/MenuScenes/4)LevelSelectMenu(CM).unity
   isLoaded: 1
   isActive: 1

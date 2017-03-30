@@ -14,6 +14,7 @@ public class AnimationControl : MonoBehaviour {
 	public float gravity = 20.0f;
 	private Vector3 moveDirection = Vector3.zero;
 
+	public bool isMenu = false;
 
 	// Use this for initialization
 	void Start () {
@@ -22,40 +23,56 @@ public class AnimationControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		CharacterController controller = GetComponent<CharacterController> ();
 
-		if (controller.isGrounded) {
-			moveDirection = new Vector3 (Input.GetAxis ("Horizontal"), 0, Input.GetAxis ("Vertical"));
-			moveDirection = transform.TransformDirection (moveDirection);
-			moveDirection *= speed;
-			if (Input.GetButton ("Jump"))
-				moveDirection.y = jumpSpeed;
-		}
-		moveDirection.y -= gravity * Time.deltaTime;
-		controller.Move (moveDirection * Time.deltaTime);
-
-		if(Input.GetButtonDown("Jump")){
-			anim.SetTrigger ("isJumping");
-		}
-		if (moveDirection.z > 0) {
-			anim.SetBool ("isRunning", true);	
-		} else {
+		if (isMenu) {
 			anim.SetBool ("isRunning", false);
-		}
-		if (moveDirection.z < 0) {
-			anim.SetBool ("isBack", true);
-		} else {
 			anim.SetBool ("isBack", false);
-		 }
-		if (moveDirection.x > 0) {
-			anim.SetBool ("isRight", true);
-		} else {
 			anim.SetBool ("isRight", false);
-		}
-		if (moveDirection.x < 0) {
-			anim.SetBool ("isLeft", true);
-		} else {
 			anim.SetBool ("isLeft", false);
+
+			return;
+		}
+
+
+		if (!isMenu) {
+			transform.Rotate (0, Input.GetAxis ("Rotate") * 60 * Time.deltaTime, 0);
+			CharacterController controller = GetComponent<CharacterController> ();
+
+
+
+			if (controller.isGrounded) {
+				moveDirection = new Vector3 (Input.GetAxis ("Horizontal"), 0, Input.GetAxis ("Vertical"));
+				moveDirection = transform.TransformDirection (moveDirection);
+				moveDirection *= speed;
+				if (Input.GetButton ("Jump"))
+					moveDirection.y = jumpSpeed;
+			}
+			moveDirection.y -= gravity * Time.deltaTime;
+			controller.Move (moveDirection * Time.deltaTime);
+
+			if (Input.GetButtonDown ("Jump")) {
+				anim.SetTrigger ("isJumping");
+			}
+			if (Input.GetKey (KeyCode.W)) {
+				anim.SetBool ("isRunning", true);	
+			} else {
+				anim.SetBool ("isRunning", false);
+			}
+			if (Input.GetKey (KeyCode.S)) {
+				anim.SetBool ("isBack", true);
+			} else {
+				anim.SetBool ("isBack", false);
+			}
+			if (Input.GetKey (KeyCode.D)) {
+				anim.SetBool ("isRight", true);
+			} else {
+				anim.SetBool ("isRight", false);
+			}
+			if (Input.GetKey (KeyCode.A)) {
+				anim.SetBool ("isLeft", true);
+			} else {
+				anim.SetBool ("isLeft", false);
+			}
 		}
 
 	}
@@ -70,11 +87,15 @@ public class AnimationControl : MonoBehaviour {
 			EnterOceanWorld ();
 		}
 	}
+
+
 	public void EnterFireWorld(){
 		enterconfirmfireworld.ToggleMenuFire();
+		isMenu = true;
 	}
 	public void EnterOceanWorld(){
 		enterconfirmoceanworld.ToggleMenuOcean();
+		isMenu = true;
 	}
 
 }

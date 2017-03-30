@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
 public class EnterConfirmWorld : MonoBehaviour {
+
+	public AnimationControl animationcontrol;
 
 	// Use this for initialization
 	void Start () {
@@ -37,5 +40,6 @@ public class EnterConfirmWorld : MonoBehaviour {
 
 	public void Nobtn(){
 		gameObject.SetActive (false);
+		animationcontrol.isMenu = false;
 	}
 }

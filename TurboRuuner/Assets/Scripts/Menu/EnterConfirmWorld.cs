@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class EnterConfirmWorld : MonoBehaviour {
 
-	public AnimationControl animationcontrol;
+	public MenuPlayercontrol animationcontrol;
 
 	// Use this for initialization
 	void Start () {

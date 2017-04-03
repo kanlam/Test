@@ -52,7 +52,10 @@
      <Compile Include="Assets\Scripts\BeatTheMonsterMode\AttackSpawner2.cs" />
      <Compile Include="Assets\Scripts\BeatTheMonsterMode\CageFall.cs" />
      <Compile Include="Assets\Scripts\BeatTheMonsterMode\DeadMenu.cs" />
+     <Compile Include="Assets\Scripts\BeatTheMonsterMode\Floater.cs" />
+     <Compile Include="Assets\Scripts\BeatTheMonsterMode\FloatingBox.cs" />
      <Compile Include="Assets\Scripts\BeatTheMonsterMode\Monster.cs" />
+     <Compile Include="Assets\Scripts\BeatTheMonsterMode\OceanWorldBMControl.cs" />
      <Compile Include="Assets\Scripts\BeatTheMonsterMode\PlayerControllerBeatMonsterMode.cs" />
      <Compile Include="Assets\Scripts\BeatTheMonsterMode\PlayerDamage.cs" />
      <Compile Include="Assets\Scripts\BeatTheMonsterMode\PressButton.cs" />
@@ -66,16 +69,20 @@
      <Compile Include="Assets\Scripts\DontDestroy.cs" />
      <Compile Include="Assets\Scripts\Fading.cs" />
      <Compile Include="Assets\Scripts\Menu\AddGravity.cs" />
-     <Compile Include="Assets\Scripts\Menu\AnimationControl.cs" />
      <Compile Include="Assets\Scripts\Menu\CharacterSelect.cs" />
      <Compile Include="Assets\Scripts\Menu\EnterConfirmWorld.cs" />
      <Compile Include="Assets\Scripts\Menu\Menu.cs" />
-     <Compile Include="Assets\Scripts\Menu\PlayerControlMenu.cs" />
+     <Compile Include="Assets\Scripts\Menu\MenuPlayercontrol.cs" />
      <Compile Include="Assets\Scripts\Progressbar.cs" />
+     <None Include="Assets\Standard Assets\Environment\Water\Water4\Shaders\FXWater4Simple.shader" />
+     <None Include="Assets\Standard Assets\Environment\Water (Basic)\Shaders\FXWaterBasic.shader" />
      <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
+     <None Include="Assets\Standard Assets\Environment\Water\Water\Shaders\FXWaterPro.shader" />
      <None Include="Assets\Standard Assets\Characters\ThirdPersonCharacter\ThirdPersonCharacterGuidelines.txt" />
      <None Include="Assets\Standard Assets\Cameras\CameraGuidelines.txt" />
      <None Include="Assets\Standard Assets\Characters\FirstPersonCharacter\FirstPersonCharacterGuidelines.txt" />
+     <None Include="Assets\Standard Assets\Environment\Water\Water4\Shaders\WaterInclude.cginc" />
+     <None Include="Assets\Standard Assets\Environment\Water\Water4\Shaders\FXWater4Advanced.shader" />
      <None Include="Assets\Standard Assets\Characters\RollerBall\RollerBallGuidelines.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>

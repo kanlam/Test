@@ -55,9 +55,9 @@ public class MenuPlayercontrol : MonoBehaviour {
 				anim.SetTrigger ("isJumping");
 			}
 			if (!controller.isGrounded) {
-				anim.SetBool ("isGrounded", false);		
+				anim.SetBool ("isAir", false);		
 			} else {
-				anim.SetBool ("isGrounded", true);
+				anim.SetBool ("isAir", true);
 			}
 			if (Input.GetKey (KeyCode.W)) {
 				anim.SetBool ("isRunning", true);	

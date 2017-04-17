@@ -41,12 +41,4 @@ public class CageFall : MonoBehaviour {
 	public void callToMenu(){
 		winMenu.ToggleWinMenu ();
 	}
-
-	/*IEnumerator WaitMenu()
-	{
-		
-		Debug.Log ("Waiting");
-		yield return new WaitForSeconds (2f);
-		Debug.Log ("WaitingEnd");
-	}*/
 }

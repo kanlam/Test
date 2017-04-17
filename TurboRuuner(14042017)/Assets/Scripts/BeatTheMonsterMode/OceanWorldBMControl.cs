@@ -7,7 +7,11 @@ public class OceanWorldBMControl : MonoBehaviour {
 
 	public Animator anim;
 	public CharacterController controller;
-	public GameObject water;
+	public GameObject PlayerCharacter;
+
+	public AudioSource SprintingSound;
+	public AudioSource SwimmingSound;
+	public AudioSource RunningSound;
 
 	public float speed = 6;
 	public float sprintSpeed;
@@ -18,9 +22,9 @@ public class OceanWorldBMControl : MonoBehaviour {
 	public bool OnGround = true;
 	public bool DoubleJumped;
 	public bool isSprinting = false;
-	public bool isBootsed = false;
+	//public bool isBootsed = false;
 	public bool isSwimming = false;
-	public bool isPressSprint;
+	public bool PressingSprint;
 
 	public Slider staminaBar;
 	public int maxStamina;
@@ -41,9 +45,9 @@ public class OceanWorldBMControl : MonoBehaviour {
 
 		currentSpeed = speed;
 		sprintSpeed = speed * 2;
+
 		staminaBar.maxValue = maxStamina;
 		staminaBar.value = maxStamina;
-
 		staminaFallrate = 1;
 		staminaRegainrate = 1;
 	}
@@ -52,86 +56,25 @@ public class OceanWorldBMControl : MonoBehaviour {
 	void Update () {
     	AnimationControl();
 		AirTime ();
-		MovementControl ();   
+		MovementControl ();
+		Sprinting ();
+
+
 	}
 
 	void MovementControl()
     {
-		float rotation = Input.GetAxis ("Horizontal") * turnspeed;
-		rotation *= Time.deltaTime;
-		transform.Rotate (0, rotation, 0);
 
-		if (Input.GetKey (KeyCode.P)) {
-			isPressSprint = true;
-		} else {
-			isPressSprint = false;
+		 moveDirection = new Vector3 (Input.GetAxis ("Horizontal") * speed, moveDirection.y, Input.GetAxis ("Vertical") * currentSpeed);
+	     moveDirection = transform.TransformDirection (moveDirection);
+
+		if (OnGround && Input.GetButtonDown ("Jump")) {
+		    moveDirection.y = jumpSpeed;
 		}
 
-
-		if (controller.isGrounded) {
-			
-			moveDirection = new Vector3 (0, 0, Input.GetAxis ("Vertical") * currentSpeed);
-			moveDirection = transform.TransformDirection (moveDirection);
-		}
-
-			if (Input.GetKey (KeyCode.W) && Input.GetKey(KeyCode.P) && !isSwimming) {
-				isSprinting = true;
-			} 
-			else {
-				isSprinting = false;
-			}
-
-			if (staminaBar.value >= maxStamina) {
-				staminaBar.value = maxStamina;
-
-			} else if (staminaBar.value <= 0) {
-				isSprinting = false;
-				staminaBar.value = 0;
-				currentSpeed = speed;
-			}
-
-			if (OnGround && Input.GetButtonDown ("Jump")) {
-				moveDirection.y = jumpSpeed;
-			}
-		     
-			if (!OnGround && Input.GetButtonDown ("Jump") && !DoubleJumped) {
-				moveDirection.y = jumpSpeed;
-				DoubleJumped = true;
-			}
-
-		    if (!isSprinting && !isBootsed) {
-				currentSpeed = speed;
-				staminaBar.value += Time.deltaTime / staminaRegainrate * staminaReganinMult;
-			}
-
-		if (isSprinting && !isBootsed && isPressSprint) {
-				currentSpeed = sprintSpeed;
-				staminaBar.value -= Time.deltaTime / staminaFallrate * staminaFallMult;
-			}
-
-		    if (isSprinting && isBootsed ) {
-				currentSpeed = sprintSpeed;
-				staminaBar.value -= Time.deltaTime / staminaFallrate * staminaFallMult;
-				boostTime -= Time.deltaTime * boostTimeFallrate;
-				if (boostTime <= 0) {
-					isBootsed = false;
-					currentSpeed = speed;
-					boostTime = 20f;
-				}
-			}
-			if (!isSprinting && isBootsed) {
-				currentSpeed = sprintSpeed;
-				staminaBar.value += Time.deltaTime / staminaRegainrate * staminaReganinMult;
-				boostTime -= Time.deltaTime * boostTimeFallrate;
-				if (boostTime <= 0) {
-					isBootsed = false;
-					currentSpeed = speed;
-					boostTime = 20f;
-				}
-			}
-		    
-		if (isSprinting && !isPressSprint) {
-			staminaBar.value += Time.deltaTime / staminaRegainrate * staminaReganinMult;
+		if (!OnGround && Input.GetButtonDown ("Jump") && !DoubleJumped) {
+			moveDirection.y = jumpSpeed;
+			DoubleJumped = true;
 		}
 
 		moveDirection.y -= gravity*Time.deltaTime;		
@@ -154,19 +97,22 @@ public class OceanWorldBMControl : MonoBehaviour {
 		else {
 			anim.SetBool ("isAir", true);
 		}
-		if (Input.GetKey (KeyCode.W)) {
-			anim.SetBool ("isRunning", true);	
+		if (Input.GetKey (KeyCode.S)) {
+			anim.SetBool ("isRunning", true);
 		} 
 		else {
 			anim.SetBool ("isRunning", false);
+			RunningSound.Play ();
+
 		}
-		if (staminaBar.value > 0 && isSprinting || isBootsed) {
+		if (staminaBar.value > 0 && isSprinting) { // ||isbooted
 			anim.SetBool ("isSprinting", true);
 		} 
 		else {
 			anim.SetBool ("isSprinting", false);
+			SprintingSound.Play ();
 		}
-		if (Input.GetKey (KeyCode.S)) {
+		if (Input.GetKey (KeyCode.W)) {
 			anim.SetBool ("isBack", true);	
 		} 
 		else {
@@ -176,6 +122,7 @@ public class OceanWorldBMControl : MonoBehaviour {
 			anim.SetBool ("isSwimming", true);
 		} else {
 			anim.SetBool ("isSwimming", false);
+			SwimmingSound.Play ();
 		}
 	}
 
@@ -189,10 +136,74 @@ public class OceanWorldBMControl : MonoBehaviour {
 		}
 	}
 
+	void Sprinting(){
+
+		if (OnGround) {
+			if (Input.GetKey (KeyCode.S) && Input.GetKey (KeyCode.P) && !isSwimming) {
+				isSprinting = true;
+			} else {
+				isSprinting = false;
+			}
+		}
+
+			if (staminaBar.value >= maxStamina) {
+				staminaBar.value = maxStamina;
+
+			} else if (staminaBar.value <= 0) {
+				isSprinting = false;
+				staminaBar.value = 0;
+				currentSpeed = speed;
+			}
+
+			if (!isSprinting) {
+				currentSpeed = speed;
+				staminaBar.value += Time.deltaTime / staminaRegainrate * staminaReganinMult;
+			}
+
+		    if (isSprinting && PressingSprint) {
+				currentSpeed = sprintSpeed;
+				staminaBar.value -= Time.deltaTime / staminaFallrate * staminaFallMult;
+			}
+		 if (isSprinting && !PressingSprint && !OnGround) {
+			   currentSpeed = sprintSpeed;
+			   staminaBar.value += Time.deltaTime / staminaFallrate * staminaFallMult;
+		}
+
+		if (Input.GetKey (KeyCode.P)) {
+			PressingSprint = true;
+		} else {
+			PressingSprint = false;
+		}
+			/*if (isSprinting && isBootsed ) {
+			currentSpeed = sprintSpeed;
+			staminaBar.value -= Time.deltaTime / staminaFallrate * staminaFallMult;
+			boostTime -= Time.deltaTime * boostTimeFallrate;
+			if (boostTime <= 0) {
+				isBootsed = false;
+				currentSpeed = speed;
+				boostTime = 20f;
+			}
+		}
+		if (!isSprinting && isBootsed) {
+			currentSpeed = sprintSpeed;
+			staminaBar.value += Time.deltaTime / staminaRegainrate * staminaReganinMult;
+			boostTime -= Time.deltaTime * boostTimeFallrate;
+			if (boostTime <= 0) {
+				isBootsed = false;
+				currentSpeed = speed;
+				boostTime = 20f;
+			}
+		}*/
+
+	}
+
+
+
+
 	void OnTriggerEnter(Collider other){
 		if (other.gameObject.tag == "water") {
 			isSwimming = true;
-			Debug.Log ("inWater");
+			//Debug.Log ("inWater");
 		} 
 	} 
 	void OnTriggerExit(){

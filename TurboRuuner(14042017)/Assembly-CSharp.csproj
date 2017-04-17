@@ -6,7 +6,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{4AE153E8-1948-9382-8959-0E7D6F530351}</ProjectGuid>
+    <ProjectGuid>{F23017AC-64B5-9A51-E528-D0ED2760AC40}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -46,12 +46,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Break.cs" />
+     <Compile Include="Assets\LowPolyWater\Demo\Scripts\DemoFreeFlyCamera.cs" />
+     <Compile Include="Assets\LowPolyWater\Scripts\LowPolyWater.cs" />
      <Compile Include="Assets\Scripts\AudioController.cs" />
      <Compile Include="Assets\Scripts\BeatTheMonsterMode\AttackMotion.cs" />
      <Compile Include="Assets\Scripts\BeatTheMonsterMode\AttackSpawner.cs" />
      <Compile Include="Assets\Scripts\BeatTheMonsterMode\AttackSpawner2.cs" />
      <Compile Include="Assets\Scripts\BeatTheMonsterMode\CageFall.cs" />
      <Compile Include="Assets\Scripts\BeatTheMonsterMode\DeadMenu.cs" />
+     <Compile Include="Assets\Scripts\BeatTheMonsterMode\DestoryBox.cs" />
      <Compile Include="Assets\Scripts\BeatTheMonsterMode\Floater.cs" />
      <Compile Include="Assets\Scripts\BeatTheMonsterMode\FloatingBox.cs" />
      <Compile Include="Assets\Scripts\BeatTheMonsterMode\Monster.cs" />
@@ -74,6 +78,7 @@
      <Compile Include="Assets\Scripts\Menu\Menu.cs" />
      <Compile Include="Assets\Scripts\Menu\MenuPlayercontrol.cs" />
      <Compile Include="Assets\Scripts\Progressbar.cs" />
+     <None Include="Assets\LowPolyWater\Shaders\LowPolyWater.shader" />
      <None Include="Assets\Standard Assets\Environment\Water\Water4\Shaders\FXWater4Simple.shader" />
      <None Include="Assets\Standard Assets\Environment\Water (Basic)\Shaders\FXWaterBasic.shader" />
      <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
@@ -105,7 +110,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
-      <Project>{71E374E4-9FB5-55FC-2B58-F6D20CB13900}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
+      <Project>{EC67894A-EED0-88B4-2675-22461D14B6DC}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

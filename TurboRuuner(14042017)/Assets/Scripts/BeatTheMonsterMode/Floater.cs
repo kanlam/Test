@@ -2,24 +2,39 @@ using UnityEngine;
 using System.Collections;
 
 public class Floater : MonoBehaviour {
-	public float waterLevel, floatHeight;
-	public Vector3 buoyancyCentreOffset;
-	public float bounceDamp;
-
-	private Rigidbody rigidbody;
+	
+	private Transform seaPlane;
+	private Cloth planeCloth;
+	private int closesrVertextIndex = -1;
 
 	void Start(){
-		rigidbody = GetComponent<Rigidbody> ();
+		seaPlane = GameObject.Find ("Sea").transform;
+		planeCloth = seaPlane.GetComponent<Cloth>();
 	}
 	
 
-	void FixedUpdate () {
-		Vector3 actionPoint = transform.position + transform.TransformDirection(buoyancyCentreOffset);
-		float forceFactor = 1f - ((actionPoint.y - waterLevel) / floatHeight);
-		
-		if (forceFactor > 0f) {
-			Vector3 uplift = -Physics.gravity * (forceFactor - rigidbody.velocity.y * bounceDamp);
-			rigidbody.AddForceAtPosition(uplift, actionPoint);
+	void Update ()
+	{
+		GetClosestVertex ();
+	}
+
+	void GetClosestVertex(){
+		for (int i = 0; i < planeCloth.vertices.Length; i++) {
+			if (closesrVertextIndex == -1) {
+				closesrVertextIndex = i;
+			}
+
+			float distance = Vector3.Distance (planeCloth.vertices[i],transform.position);
+			float closesDistance = Vector3.Distance (planeCloth.vertices[closesrVertextIndex],transform.position);
+
+			if (distance < closesDistance) {
+				closesrVertextIndex = i;
+			}
 		}
+		transform.position = new Vector3 (
+			transform.position.x, 
+			planeCloth.vertices [closesrVertextIndex].y, 
+			transform.position.z
+		);
 	}
 }

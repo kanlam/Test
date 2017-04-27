@@ -33,8 +33,8 @@ public class CageFall : MonoBehaviour {
 
 
 	public void Fall(){
-		Cage.AddComponent<Rigidbody> ();
-		//Rigidbody Cage = gameObject.AddComponent<Rigidbody> () as Rigidbody;
+		//Cage.AddComponent<Rigidbody> ();
+		Rigidbody Cage = gameObject.AddComponent<Rigidbody> () as Rigidbody;
 		Falled = true;
 		isWin = true;
 		Invoke ("callToMenu", waitTime);

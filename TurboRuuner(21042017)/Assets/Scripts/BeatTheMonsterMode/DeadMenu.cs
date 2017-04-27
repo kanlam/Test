@@ -21,6 +21,11 @@ public class DeadMenu : MonoBehaviour {
 		SceneManager.LoadScene (SceneManager.GetActiveScene ().name);
 		}
 
+	public void backToLevelSel()
+	{
+		SceneManager.LoadScene ("3)LevelSelectMenu(BM)");
+	} 
+
 	public void ToggleDeathMenu()
 	{
 		gameObject.SetActive (true);

@@ -8,7 +8,6 @@ public class AttackMotion : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
 	}
 	
 	// Update is called once per frame
@@ -21,6 +20,5 @@ public class AttackMotion : MonoBehaviour {
 			Destroy (this.gameObject);
 		}
 	}
-
 }
 

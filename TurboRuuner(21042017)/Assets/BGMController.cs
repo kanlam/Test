@@ -26,21 +26,5 @@ public class BGMController : MonoBehaviour {
 	void Update () {
 		
 	}
-
-	/*void GetBool(){
-		if (character.isDead) {
-			isDead = true;
-			character.source.clip = DeadBGM;
-			character.source.Play ();
-		} else {
-			isDead = false;
-		}
-		if (character.isWin) {
-			isWin = true;
-			//source.clip = WinBGM;
-			source.PlayOneShot (WinBGM);
-		} else {
-			isWin = false;
-		}
-	}*/
+		
 }

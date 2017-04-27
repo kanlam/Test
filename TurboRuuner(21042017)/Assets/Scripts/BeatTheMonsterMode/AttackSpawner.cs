@@ -2,39 +2,48 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackSpawner: MonoBehaviour {
+public class AttackSpawner : MonoBehaviour {
 
+	public Transform[] spawnLocations;
+	public GameObject[] Prefab;
+	public GameObject[] Clone;
 
-	public GameObject[] enemies;
-	public float spawnWait;
-	public int startWait;
+	public int spawnRandomPos;
+	public float spawnRandomTime;
 	public float spawnWaitMin;
 	public float spawnWaitMax;
+	public int StartWait;
 	public bool stop;
-	public bool attacking =true;
-
-	public GameObject monster;
+	public bool Attacktwo = false;
 
 
-	// Use this for initialization
-	void Start () {
-	   StartCoroutine (WaitSpawer ());
+	void Start(){
+		StartCoroutine (WaitSpawer ());
 	}
 
-	// Update is called once per frame
-	void Update () {
+	void Update(){
 		
-		spawnWait = Random.Range (spawnWaitMin, spawnWaitMax);
+		spawnRandomPos = Random.Range (0, 2);
+		spawnRandomTime = Random.Range (spawnWaitMin, spawnWaitMax);
 	}
-	IEnumerator WaitSpawer()
-	{
-		yield return new WaitForSeconds(startWait);
-		while (!stop) 
-		{
-			Vector3 spawnPosition = new Vector3 (Random.Range(monster.transform.position.x -3,monster.transform.position.x +3),monster.transform.position.y,monster.transform.position.z);
-			Instantiate (enemies [0], spawnPosition, Quaternion.identity);			
-			yield return new WaitForSeconds (spawnWait);
+
+	IEnumerator WaitSpawer(){
+		yield return new WaitForSeconds (StartWait);
+
+
+
+		while(!stop) {
+				Clone [0] = Instantiate (Prefab [0], spawnLocations [spawnRandomPos].transform.position, Quaternion.Euler (0, 0, 0)) as GameObject;//ball
+				if (Attacktwo) {
+					Clone [1] = Instantiate (Prefab [1], spawnLocations [2].transform.position, Quaternion.Euler (0, 90, 0)) as GameObject;
+				}
+				yield return new WaitForSeconds (spawnRandomTime);
+			}
+	}
+
+	void OnTriggerEnter (Collider hit){
+		if (hit.gameObject.name == "StartAtt2") {
+			Attacktwo = true;
 		}
 	}
-
 }

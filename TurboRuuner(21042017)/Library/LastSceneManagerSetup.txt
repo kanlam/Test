@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/MenuScenes/3)LevelSelectMenu(BM).unity
+- path: Assets/Scenes/BeatTheMonsterModeScenes/OceanWorld(BM).unity
   isLoaded: 1
   isActive: 1

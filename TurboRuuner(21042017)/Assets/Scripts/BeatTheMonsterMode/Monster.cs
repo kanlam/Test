@@ -7,6 +7,8 @@ public class Monster : MonoBehaviour {
 	public float speed;
 	public bool isMove;
 
+	public AttackSpawner spawner;
+
 	// Use this for initialization
 	void Start () {
 		Invoke ("Startup", 2);
@@ -38,7 +40,8 @@ public class Monster : MonoBehaviour {
 
 	void OnTriggerEnter(Collider hit){
 		if (hit.gameObject.name == "MonsterStop") {
-			isMove = false;		
+			isMove = false;	
+			spawner.stop = true;
 		}	
 	}
 }
